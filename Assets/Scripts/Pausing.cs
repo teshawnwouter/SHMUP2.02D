@@ -5,24 +5,38 @@ using UnityEngine.InputSystem;
 
 public class Pausing : MonoBehaviour
 {
-    private GameObject pauseMenu;
+    [SerializeField]private GameObject pauseMenu;
+    private bool isPaused = false;
 
-
-    public void OnPause(InputValue value)
+    [SerializeField] private Shooting shooting;
+   
+    public void OnPause()
     {
-        Time.timeScale = 0f;
+       if (isPaused)
+       {
+            isPaused = false;
+            UnPause();
+       }
+        else
+        {
 
-        pauseMenu.SetActive(true);
+            isPaused = true;
+            Pause();
+        }
     }
 
-    void Start()
+    void Pause()
     {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        shooting.enabled = false;
 
-        pauseMenu = GetComponent<GameObject>();
     }
     public void UnPause()
     {
         pauseMenu.SetActive(false);
+        Time.timeScale = 1;
+       shooting.enabled = true;
     }
   
     void Update()

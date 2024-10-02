@@ -14,7 +14,7 @@ public class Shooting : MonoBehaviour
     {
         
     }
-    public void OnShooting(InputValue value)
+    public void OnShooting()
     {
         Instantiate(projectile,attackPoint.position,Quaternion.identity);
     }
