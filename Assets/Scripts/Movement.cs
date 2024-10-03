@@ -1,32 +1,49 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Rendering;
 
+[RequireComponent(typeof(PlayerInput))]
 public class Movement : MonoBehaviour
 {
     //making variables that controll the movement and the speed of the Player
     Vector2 moveVector;
     [SerializeField] private float moveSpeed;
     Rigidbody2D rb;
-
-    private void Start()
-    {
-        //linking the rb
-        rb = GetComponent<Rigidbody2D>();
-    }
     
+    
+    private PlayerInput playerInput;
 
-    public void OnMoveKeyboard(InputValue value)
+    private bool isMoving;
+
+    private PlayerControler playerControler;
+
+    private void Awake()
     {
-        //getting the value to move left and right or in anydirections
-        moveVector = value.Get<Vector2>();
+        rb = GetComponent<Rigidbody2D>();
+
+        playerControler = new PlayerControler();
+
+
+        playerControler.PCInputmanager.MoveKeyboard.Enable();
+        playerInput = GetComponent<PlayerInput>();
+
     }
 
-    void Update()
+  
+
+   
+    
+   
+
+    void FixedUpdate()
     {
-        //changing the postion of the character
-        rb.MovePosition(rb.position +  moveVector * moveSpeed * Time.deltaTime);
+        Vector2 playerInput = playerControler.PCInputmanager.MoveKeyboard.ReadValue<Vector2>();
+
+        rb.velocity = new Vector2(playerInput.x * moveSpeed, 0);
+
+
     }
 }

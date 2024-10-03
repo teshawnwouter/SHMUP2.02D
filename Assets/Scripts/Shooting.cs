@@ -14,13 +14,12 @@ public class Shooting : MonoBehaviour
     {
         
     }
-    public void OnShooting()
+    public void OnShooting(InputAction.CallbackContext context)
     {
-        Instantiate(projectile,attackPoint.position,Quaternion.identity);
-    }
-
-    void Update()
-    {
+        if (context.performed)
+        {
+            Instantiate(projectile, attackPoint.position, Quaternion.identity);
+        }
         
     }
 }
