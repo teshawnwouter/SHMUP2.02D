@@ -10,17 +10,30 @@ public class Pausing : MonoBehaviour
     private bool isPaused = false;
 
     [SerializeField] private Shooting shooting;
-   
-    public void OnPause()
+
+    PlayerControler playerControler;
+
+    private bool IsPaused;
+
+    private void Awake()
     {
-       if (isPaused)
-       {
+        shooting = GetComponent<Shooting>();
+        playerControler =  new PlayerControler();
+
+       
+        playerControler.PCInputmanager.Pause.performed += Pause_performed;
+        playerControler.PCInputmanager.Pause.Enable();
+    }
+
+    private void Pause_performed(InputAction.CallbackContext context)
+    {
+        if (IsPaused)
+        {
             isPaused = false;
             UnPause();
-       }
+        }
         else
         {
-
             isPaused = true;
             Pause();
         }
@@ -38,10 +51,5 @@ public class Pausing : MonoBehaviour
         pauseMenu.SetActive(false);
         Time.timeScale = 1;
        shooting.enabled = true;
-    }
-  
-    void Update()
-    {
-        
     }
 }

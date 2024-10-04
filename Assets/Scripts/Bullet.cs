@@ -10,11 +10,11 @@ public class Bullet : MonoBehaviour
     void Start()
     {
         GetComponent<Rigidbody2D>();
+        rb.velocity = transform.up * bulletSpeed;
     }
 
     void Update()
     {
-        rb.AddForce(Vector2.up * bulletSpeed);
         Destroy(this.gameObject, 3f);
     }
 }

@@ -9,12 +9,7 @@ public class Shooting : MonoBehaviour
 
     public GameObject projectile;
 
-
-    private void Start()
-    {
-        
-    }
-    public void OnShooting(InputAction.CallbackContext context)
+    private void OnShooting(InputAction.CallbackContext context)
     {
         if (context.performed)
         {
