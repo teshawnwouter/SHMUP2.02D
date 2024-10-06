@@ -2,17 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class Enemy : Character
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public int damageTaken = 10;
 
-    // Update is called once per frame
-    void Update()
+    public float shootCooldown;
+
+    public GameObject enemyBullets;
+
+    public Transform enemyAttackPoint;
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        
+        if (collision.gameObject.CompareTag("PlayerBullet"))
+        {
+            TakeDamage(damageTaken);
+        }
     }
 }
