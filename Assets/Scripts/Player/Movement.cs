@@ -9,15 +9,9 @@ using UnityEngine.Rendering;
 public class Movement : MonoBehaviour
 {
     //making variables that controll the movement and the speed of the Player en de rigidbody2D en ook de controlls aangemaakt in unity
-    Vector2 moveVector;
     [SerializeField] private float moveSpeed;
     Rigidbody2D rb;
-    
-    
-    private PlayerInput playerInput;
-
-    private bool isMoving;
-
+   
     private PlayerControler playerControler;
 
     private void Awake()
@@ -29,8 +23,7 @@ public class Movement : MonoBehaviour
 
 
         playerControler.PCInputmanager.MoveKeyboard.Enable();
-        playerInput = GetComponent<PlayerInput>();
-
+      
     }
 
     //verander je update naar fixedUpdated en maak ene vector2 aan die de input leest als hij hem leest dan zet je velocity aan de rigitbody zijn x pos maal de snelheid

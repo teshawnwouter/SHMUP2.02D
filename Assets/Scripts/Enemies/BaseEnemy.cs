@@ -1,14 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 
 public class BaseEnemy : Enemy
 {
-    GameObject target;
+    private GameObject target;
+
     void Start()
     {
+
         target = GameObject.FindGameObjectWithTag("Player");
-       
+      
 
         shootCooldown = 1f;
 
@@ -18,7 +21,11 @@ public class BaseEnemy : Enemy
 
     void Update()
     {
-        
+        Vector3 directoion = target.transform.position - transform.position;
+
+      
+        transform.right = directoion;
+        transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 
      IEnumerator ShootingPlayer()

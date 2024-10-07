@@ -306,7 +306,7 @@ Transform:
   m_GameObject: {fileID: 58711941}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 1, w: 0}
-  m_LocalPosition: {x: -0.46554932, y: 3.4450653, z: 0}
+  m_LocalPosition: {x: -0.43, y: 3.4450653, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -325,7 +325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 20
-  damageAmount: 3
+  damageTaken: 10
   shootCooldown: 2
   enemyBullets: {fileID: 1829374038437478116, guid: 49c4134c70486194f944c72ef86abf30, type: 3}
   enemyAttackPoint: {fileID: 58711943}
