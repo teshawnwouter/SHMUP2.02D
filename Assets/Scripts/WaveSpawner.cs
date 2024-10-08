@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
@@ -15,14 +14,6 @@ public class WaveSpawner : MonoBehaviour
 
     //een array link aan de waves class
     public wave[] waves;
-
-
-    public static WaveSpawner Instance;
-
-    private void Awake()
-    {
-        Instance = this;
-    }
 
     void Start()
     {
@@ -62,9 +53,9 @@ public class WaveSpawner : MonoBehaviour
         }
         if (waves[currentWaveIndex].enemiesleft == 0)
         {
+            readyToCountDown = true;
             currentWaveIndex++;
-            Debug.Log(currentWaveIndex.ToString());
-
+            
         }
 
     }
@@ -82,18 +73,10 @@ public class WaveSpawner : MonoBehaviour
             {
                 Enemy enemies = Instantiate(waves[currentWaveIndex].enemies[i], spawnPoint.transform);
                 enemies.transform.SetParent(spawnPoint.transform);
+
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
             }
         }
-    }
-
-
-
-
-    public void NoMoreEnemies()
-    {
-        waves[currentWaveIndex].enemiesleft--;
-
     }
 }
 
@@ -112,7 +95,6 @@ public class wave
     public float timeToNextEnemey;
     public float timeToNectWave;
 
-    [HideInInspector]
-    public int enemiesleft;
+    [HideInInspector] public int enemiesleft;
 
 }

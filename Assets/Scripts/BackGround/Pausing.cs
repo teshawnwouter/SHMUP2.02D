@@ -14,7 +14,6 @@ public class Pausing : MonoBehaviour
 
     PlayerControler playerControler;
 
-    private bool IsPaused;
 
     private void Awake()
     {
@@ -30,7 +29,7 @@ public class Pausing : MonoBehaviour
     //maken de functie die de bool verandert naar true of false
     private void Pause_performed(InputAction.CallbackContext context)
     {
-        if (IsPaused)
+        if (isPaused)
         {
             isPaused = false;
             UnPause();

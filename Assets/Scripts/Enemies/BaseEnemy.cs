@@ -5,25 +5,20 @@ using UnityEngine;
 
 public class BaseEnemy : Enemy
 {
+
     private GameObject target;
 
 
-    void Start()
+    public override void Start()
     {
-
+        base.Start();
         target = GameObject.FindGameObjectWithTag("Player");
       
 
         shootCooldown = 1f;
 
         StartCoroutine(ShootingPlayer());
-    }
 
-
-    public virtual void TakeDamage()
-    {
-        TakeDamage();
-        WaveSpawner.Instance.NoMoreEnemies();
     }
 
     void Update()
