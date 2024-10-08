@@ -5,10 +5,10 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Character : MonoBehaviour
 {
-    float damageTaken;
-
-
     public int health;
+
+    
+  
     public virtual void TakeDamage(int Amount)
     {
 
@@ -16,6 +16,7 @@ public class Character : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            WaveSpawner.Instance.NoMoreEnemies();
         }
 
     }

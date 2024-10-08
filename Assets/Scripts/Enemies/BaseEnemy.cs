@@ -7,6 +7,7 @@ public class BaseEnemy : Enemy
 {
     private GameObject target;
 
+
     void Start()
     {
 
@@ -18,6 +19,12 @@ public class BaseEnemy : Enemy
         StartCoroutine(ShootingPlayer());
     }
 
+
+    public virtual void TakeDamage()
+    {
+        TakeDamage();
+        WaveSpawner.Instance.NoMoreEnemies();
+    }
 
     void Update()
     {

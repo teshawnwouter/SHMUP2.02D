@@ -17,6 +17,13 @@ public class WaveSpawner : MonoBehaviour
     public wave[] waves;
 
 
+    public static WaveSpawner Instance;
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     void Start()
     {
         //aan het begin van de game zet je de countdown op true zodat hij teld
@@ -56,7 +63,10 @@ public class WaveSpawner : MonoBehaviour
         if (waves[currentWaveIndex].enemiesleft == 0)
         {
             currentWaveIndex++;
+            Debug.Log(currentWaveIndex.ToString());
+
         }
+
     }
 
     private IEnumerator SpawnWave()
@@ -75,6 +85,15 @@ public class WaveSpawner : MonoBehaviour
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
             }
         }
+    }
+
+
+
+
+    public void NoMoreEnemies()
+    {
+        waves[currentWaveIndex].enemiesleft--;
+
     }
 }
 
