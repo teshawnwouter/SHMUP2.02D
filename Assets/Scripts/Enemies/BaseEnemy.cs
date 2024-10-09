@@ -5,6 +5,10 @@ using UnityEngine;
 
 public class BaseEnemy : Enemy
 {
+    public GameObject enemyBullets;
+    public Transform enemyAttackPoint;
+
+    public float shootCooldown;
 
     private GameObject target;
 
@@ -12,6 +16,7 @@ public class BaseEnemy : Enemy
     public override void Start()
     {
         base.Start();
+        health = 40;
         target = GameObject.FindGameObjectWithTag("Player");
       
 
@@ -35,13 +40,7 @@ public class BaseEnemy : Enemy
         while (true)
         {
             yield return new WaitForSeconds(shootCooldown);
-
             Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-            Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(0.1f);
-            Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
-
             yield return new WaitForSeconds(shootCooldown);
            
         }

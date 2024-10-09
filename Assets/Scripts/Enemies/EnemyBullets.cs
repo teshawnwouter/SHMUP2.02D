@@ -11,7 +11,7 @@ public class EnemyBullets : Bullet
     public override void Start()
     {
         base.Start();
-        bulletSpeed = 30f;
+        bulletSpeed = 10f;
         player = GameObject.FindGameObjectWithTag("Player");
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * bulletSpeed;

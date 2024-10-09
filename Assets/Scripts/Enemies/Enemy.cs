@@ -5,13 +5,7 @@ using UnityEngine;
 public class Enemy : Character
 {
     public int damageTaken = 10;
-
-    public float shootCooldown;
-
-    public GameObject enemyBullets;
-
-    public Transform enemyAttackPoint;
-
+   
     [SerializeField]public WaveSpawner waveSpawner;
 
     public virtual void Start()
