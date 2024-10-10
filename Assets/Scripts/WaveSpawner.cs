@@ -27,9 +27,8 @@ public class WaveSpawner : MonoBehaviour
             for (int j = 0; i < waves[i].groups.Length; j++)
             {
                 waves[i].groups[j].enemiesleft = waves[i].groups[j].enemies.Length;
+                Debug.Log(waves[i].groups[j].enemiesleft);
             }
-            
-
         }
     }
 
@@ -37,6 +36,11 @@ public class WaveSpawner : MonoBehaviour
          {
             
             if (currentWaveIndex >= waves.Length)
+            {
+                return;
+            }
+
+            if(groupIndex >= waves[currentWaveIndex].groups.Length)
             {
                 return;
             }
