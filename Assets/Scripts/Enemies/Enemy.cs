@@ -6,12 +6,11 @@ public class Enemy : Character
 {
     public int damageTaken = 10;
    
-    public WaveSpawner waveSpawner;
-
+    [SerializeField]public WaveSpawner waveSpawner;
 
     public virtual void Start()
     {
-        waveSpawner = FindObjectOfType<WaveSpawner>();
+        waveSpawner = GetComponentInParent<WaveSpawner>();
     }
     public void OnTriggerEnter2D(Collider2D collision)
     {
@@ -26,11 +25,9 @@ public class Enemy : Character
         base.TakeDamage(Amount);
         if (health <= 0)
         {
-            waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
-
             Destroy(gameObject);
 
-            
+           // waveSpawner.waves[waveSpawner.currentWaveIndex].groups[groupIndex].enemiesleft--;
         }
     }
 }

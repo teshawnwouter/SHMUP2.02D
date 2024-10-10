@@ -148,7 +148,6 @@ MonoBehaviour:
   health: 20
   damageTaken: 10
   waveSpawner: {fileID: 0}
-  spawnPos: {x: 2.4, y: 0}
   enemyBullets: {fileID: 1829374038437478116, guid: 49c4134c70486194f944c72ef86abf30, type: 3}
   enemyAttackPoint: {fileID: 1878424303548230423}
   shootCooldown: 2
