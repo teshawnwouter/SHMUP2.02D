@@ -16,10 +16,7 @@ public class EnemyBullets : Bullet
         Vector3 direction = player.transform.position - transform.position;
         rb.velocity = new Vector2(direction.x, direction.y).normalized * bulletSpeed;
 
-        Vector3 directoion = player.transform.position - transform.position;
-
-
-        transform.right = directoion;
-        transform.rotation *= Quaternion.Euler(0, 0, -90);
+        transform.up = direction;
+        //transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 }

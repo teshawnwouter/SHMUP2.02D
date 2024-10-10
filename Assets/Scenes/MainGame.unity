@@ -708,17 +708,20 @@ MonoBehaviour:
   countdown: 1
   spawnPoint: {fileID: 1125482880}
   currentWaveIndex: 0
+  groupIndex: 0
   waves:
-  - enemies:
-    - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+  - groups:
+    - enemies:
+      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      enemiesleft: 0
+    - enemies:
+      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      enemiesleft: 0
     timeToNextEnemey: 2
     timeToNectWave: 2
-    enemiesleft: 1
-  - enemies:
-    - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+  - groups: []
     timeToNextEnemey: 2
     timeToNectWave: 2
-    enemiesleft: 0
 --- !u!1 &1359889539
 GameObject:
   m_ObjectHideFlags: 0

@@ -27,7 +27,7 @@ public class Enemy : Character
         {
             Destroy(gameObject);
 
-            waveSpawner.waves[waveSpawner.currentWaveIndex].enemiesleft--;
+           // waveSpawner.waves[waveSpawner.currentWaveIndex].groups[groupIndex].enemiesleft--;
         }
     }
 }

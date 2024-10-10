@@ -28,11 +28,11 @@ public class BaseEnemy : Enemy
 
     void Update()
     {
-        Vector3 directoion = target.transform.position - transform.position;
+        //Vector3 directoion = 
 
       
-        transform.right = directoion;
-        transform.rotation *= Quaternion.Euler(0, 0, -90);
+        transform.up = target.transform.position - transform.position; ;
+        //transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 
      IEnumerator ShootingPlayer()
