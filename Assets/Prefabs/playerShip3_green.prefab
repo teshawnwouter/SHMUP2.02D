@@ -174,3 +174,6 @@ MonoBehaviour:
   health: 20
   damageTaken: 5
   waveSpawner: {fileID: 0}
+  spawnPos: {x: 3, y: 0}
+  state: 0
+  moveSpeed: 10
