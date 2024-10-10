@@ -750,6 +750,8 @@ MonoBehaviour:
   - groups:
     - enemies:
       - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
       enemiesleft: 0
     - enemies:
       - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
