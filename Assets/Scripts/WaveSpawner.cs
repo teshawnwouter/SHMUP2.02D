@@ -16,8 +16,6 @@ public class WaveSpawner : MonoBehaviour
 
     [SerializeField] private float waveCountDown;
 
-    public Vector2[] spawnPoints;
-    //een array link aan de waves class
     public wave[] waves;
 
     void Start()
@@ -37,14 +35,8 @@ public class WaveSpawner : MonoBehaviour
     }
 
     void Update()
-    {
-
+    { 
         if (currentWaveIndex >= waves.Length)
-        {
-            return;
-        }
-
-        if(groupIndex >= waves[currentWaveIndex].groups.Length)
         {
             return;
         }
@@ -94,9 +86,9 @@ public class WaveSpawner : MonoBehaviour
         if (currentWaveIndex < waves.Length)
         {
             for (int i = 0; i < waves[currentWaveIndex].groups[groupIndex].enemies.Length; i++)
-            {
-                spawnPoint.transform.position = spawnPoints[i];
-                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[i], spawnPoint.transform.position = (new Vector3(spawnPoint.transform.position.x, spawnPoint.transform.position.y, spawnPoint.transform.position.z)), Quaternion.identity);
+            { 
+                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);                
+
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
             }
         }

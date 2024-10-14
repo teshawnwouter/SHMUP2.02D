@@ -17,6 +17,5 @@ public class EnemyBullets : Bullet
         rb.velocity = new Vector2(direction.x, direction.y).normalized * bulletSpeed;
 
         transform.up = direction;
-        //transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 }

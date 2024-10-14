@@ -13,12 +13,13 @@ public class BaseEnemy : Enemy
     private GameObject target;
 
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
+
         health = 40;
         target = GameObject.FindGameObjectWithTag("Player");
-      
+
 
         shootCooldown = 1f;
 
@@ -26,23 +27,31 @@ public class BaseEnemy : Enemy
 
     }
 
-    void Update()
+    protected override void Update()
     {
-        //Vector3 directoion = 
-
-      
+        base.Update();
         transform.up = target.transform.position - transform.position; ;
-        //transform.rotation *= Quaternion.Euler(0, 0, -90);
     }
 
-     IEnumerator ShootingPlayer()
-     {
+    IEnumerator ShootingPlayer()
+    {
         while (true)
         {
-            yield return new WaitForSeconds(shootCooldown);
-            Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(shootCooldown);
-           
+            if (!IsSettingUp)
+            {
+                yield return new WaitForSeconds(shootCooldown);
+                //for()
+                ShootingBullets();
+                yield return new WaitForSeconds(shootCooldown);
+            }
+            else
+                yield return new WaitForEndOfFrame();
+
         }
-     }
+    }
+
+    private void ShootingBullets()
+    {
+        Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
+    }
 }

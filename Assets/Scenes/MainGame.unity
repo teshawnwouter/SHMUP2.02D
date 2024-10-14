@@ -583,37 +583,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 582015263}
   m_CullTransparentMesh: 1
---- !u!1 &719336956
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 719336957}
-  m_Layer: 0
-  m_Name: SpawnPoint
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &719336957
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 719336956}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 1125482881}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1092077265
 GameObject:
   m_ObjectHideFlags: 0
@@ -718,11 +687,10 @@ Transform:
   m_GameObject: {fileID: 1125482880}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.56, y: 5.15, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 5}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 719336957}
+  m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1125482882
@@ -738,34 +706,26 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   countdown: 1
-  spawnPoint: {fileID: 719336956}
+  spawnPoint: {fileID: 1125482880}
   currentWaveIndex: 0
   groupIndex: 0
   waveCountDown: 1
-  spawnPoints:
-  - {x: 2, y: 0}
-  - {x: 0, y: 0}
-  - {x: -2, y: 0}
   waves:
   - groups:
     - enemies:
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
       enemiesleft: 0
     - enemies:
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
       enemiesleft: 0
     timeToNextEnemey: 2
     timeToNectWave: 2
   - groups:
     - enemies:
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
       enemiesleft: 0
     - enemies:
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
       enemiesleft: 0
     timeToNextEnemey: 2
     timeToNectWave: 2
@@ -1348,11 +1308,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6482595483475013499, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.83
+      value: 0.21
       objectReference: {fileID: 0}
     - target: {fileID: 6482595483475013499, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.32381
+      value: -4.21
       objectReference: {fileID: 0}
     - target: {fileID: 6482595483475013499, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_LocalPosition.z

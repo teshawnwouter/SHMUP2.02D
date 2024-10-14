@@ -5,78 +5,98 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovingEnemy : Enemy
 {
-    private enum State { leftAndRight, upAndDown}
+    private enum State {  leftAndRight, upAndDown, none }
     [SerializeField] private State state;
 
-    private Rigidbody2D rb;
 
+    private Rigidbody2D rb;
     bool movingLeft = false;
 
+    bool movingUp = false;
 
-    [SerializeField]private float moveSpeed = 10f;
-    public override void Start()
+    [SerializeField] private float moveSpeed;
+
+    protected bool CanMove;
+
+    protected override void Start()
     {
         base.Start();
+        moveSpeed = 3f;
 
-        int stateCaller = Random.Range(0, 1);
+        for (int i = 0; i < waveSpawner.currentWaveIndex; i++)
+        {
+            moveSpeed = moveSpeed + 2;
+            health = health + 20;
+        }
+        Debug.Log(moveSpeed);
+
+        transform.rotation = Quaternion.Euler(0, 0, -180);
+
+        
+        base.Start();
 
         rb = GetComponent<Rigidbody2D>();
 
         health = 20;
 
-        if(stateCaller == 0)
-        {
-            state = State.leftAndRight;
-        }else
-        {
-            state = State.upAndDown;
-        }
+
+        state = State.none;
+    }
+
+
+    protected override void Update()
+    {
 
        
+        base.Update();
+        if (!IsSettingUp && state == State.none)
+        {
+            int stateCaller = Random.Range(0, 2);
+            if (stateCaller == 0)
+            {
+                state = State.leftAndRight;
+            }
+            else
+            {
+                state = State.upAndDown;
+            }
+        }
+
+        switch (state)
+        {
+            case State.upAndDown:
+                MoveUpAndDown();
+                break;
+            case State.leftAndRight:
+                MoveLeftAndRight();
+                break;
+        }
     }
 
 
-    private void Update()
-    {
-        if (state == State.leftAndRight)
-        {
-            MoveLeftAndRight();
-        }
-        else
-        {
-            MoveUpAndDown();
-        }
-    }
 
     private void MoveLeftAndRight()
     {
-        if(!movingLeft)
+        if (!movingLeft)
         {
-            rb.velocity = new Vector2(1 * moveSpeed * Time.deltaTime, 0);
-        } else
-        {
-            rb.velocity = new Vector2(-1 * moveSpeed * Time.deltaTime, 0);
+            rb.velocity = new Vector2(1 * moveSpeed, 0);
+            transform.rotation = Quaternion.Euler(0f, 0f, -90f);
+
         }
-        
+        else
+        {
+            rb.velocity = new Vector2(-1 * moveSpeed, 0);
+            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
-
-        float rightSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)).x;
-        float leftSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f)).x;
+        }
 
         if (transform.position.x > rightSideOfTheScreen)
         {
-            Debug.Log("moving left");
-            //rb.velocity = new Vector2(1 * moveSpeed * Time.deltaTime, 0);
             movingLeft = true;
-            //transform.rotation.SetEulerRotation(new Vector3(0f, 0f, -90f));
-            transform.rotation = Quaternion.Euler(0f, 0f, 90f);
         }
         else if (transform.position.x < leftSideOfTheScreen)
         {
-            Debug.Log("moving right");
-            //rb.velocity = new Vector2(1 * -moveSpeed * Time.deltaTime, 0);
             movingLeft = false;
-            transform.rotation = Quaternion.Euler(0f, 0f, -90f);
         }
 
 
@@ -89,6 +109,28 @@ public class MovingEnemy : Enemy
         float topSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)).y;
         float bottomSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f)).y;
 
+        if (!movingUp)
+        {
+            rb.velocity = new Vector2(0, 1 * moveSpeed);
+            transform.rotation = Quaternion.Euler(0f, 0, 0);
+
+        }
+        else
+        {
+            rb.velocity = new Vector2(0, -1 * moveSpeed);
+            transform.rotation = Quaternion.Euler(0f, 0, -180f);
+
+
+        }
+
+        if (transform.position.y > topSideOfTheScreen)
+        {
+            movingUp = true;
+        }
+        else if (transform.position.y < bottomSideOfTheScreen)
+        {
+            movingUp = false;
+        }
     }
 
 }
