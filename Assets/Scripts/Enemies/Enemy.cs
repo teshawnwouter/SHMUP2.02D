@@ -9,13 +9,15 @@ public class Enemy : Character
     private Vector2 m_InitPos;
     protected bool IsSettingUp;
 
-   public WaveSpawner waveSpawner;
+    public WaveSpawner waveSpawner;
+   
 
 
     protected float rightSideOfTheScreen;
     protected float leftSideOfTheScreen;
 
     protected float topSideOfTheScrean;
+    protected float bottomSideOfTheScrean;
 
     protected virtual void Start()
     {
@@ -26,10 +28,11 @@ public class Enemy : Character
         leftSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f)).x;
 
 
-        topSideOfTheScrean = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height/2)).y;  
+        bottomSideOfTheScrean = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height/2)).y;
+        topSideOfTheScrean = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width,Screen.height - 4)).y;
 
         m_InitPos.x = Random.Range(leftSideOfTheScreen, rightSideOfTheScreen);
-        m_InitPos.y = Random.Range(0,topSideOfTheScrean);
+        m_InitPos.y = Random.Range(bottomSideOfTheScrean,topSideOfTheScrean);
 
     }
 
@@ -64,7 +67,7 @@ public class Enemy : Character
         if (health <= 0)
         {
             waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
-
+            //infWaveSpawner.enemiesLeft--;
             Destroy(gameObject);
         }
     }

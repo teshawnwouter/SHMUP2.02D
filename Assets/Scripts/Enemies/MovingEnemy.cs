@@ -16,24 +16,19 @@ public class MovingEnemy : Enemy
 
     [SerializeField] private float moveSpeed;
 
-    protected bool CanMove;
-
     protected override void Start()
     {
         base.Start();
         moveSpeed = 3f;
 
-        for (int i = 0; i < waveSpawner.currentWaveIndex; i++)
+        for (int i = 0; i < waveSpawner.totalWaveIndex/4; i++)
         {
-            moveSpeed = moveSpeed + 2;
+            moveSpeed = moveSpeed * 2;
             health = health + 20;
         }
         Debug.Log(moveSpeed);
 
         transform.rotation = Quaternion.Euler(0, 0, -180);
-
-        
-        base.Start();
 
         rb = GetComponent<Rigidbody2D>();
 

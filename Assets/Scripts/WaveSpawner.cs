@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class WaveSpawner : MonoBehaviour
 {
-
     [SerializeField] private float countdown;
 
     [SerializeField] private GameObject spawnPoint;
     public int currentWaveIndex = 0;
     public int groupIndex = 0;
+
+    public int totalWaveIndex = 0;
 
     private bool readyToCountDown;
     private bool readyToSpawnWave;
@@ -35,10 +36,22 @@ public class WaveSpawner : MonoBehaviour
     }
 
     void Update()
-    { 
+    {
         if (currentWaveIndex >= waves.Length)
         {
-            return;
+            currentWaveIndex = 0;
+            for (int i = 0; i < waves.Length; i++)
+            {
+                for (int j = 0; j < waves[i].groups.Length; j++)
+                {
+                    waves[i].groups[j].enemiesleft = waves[i].groups[j].enemies.Length;
+                }
+            }
+        }
+
+        if (currentWaveIndex < waves.Length) 
+        {
+           
         }
 
         if (readyToCountDown == true)
@@ -60,11 +73,12 @@ public class WaveSpawner : MonoBehaviour
 
         }
 
-        if (groupIndex == waves[currentWaveIndex].groups.Length) 
+        if (groupIndex == waves[currentWaveIndex].groups.Length)
         {
             readyToSpawnWave = true;
             groupIndex = 0;
             currentWaveIndex++;
+            totalWaveIndex++;
         }
 
         if (readyToSpawnWave == true)
@@ -86,34 +100,35 @@ public class WaveSpawner : MonoBehaviour
         if (currentWaveIndex < waves.Length)
         {
             for (int i = 0; i < waves[currentWaveIndex].groups[groupIndex].enemies.Length; i++)
-            { 
-                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);                
+            {
+                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
+                Debug.Log(enemies.transform.position);
+
 
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
             }
         }
     }
-}
-
-
-
-[System.Serializable]
-
-public class wave
-{
-    public Groups[] groups;
-    public float timeToNextEnemey;
-    public float timeToNectWave;
-
-
 
 }
 
-[System.Serializable]
-public class Groups
-{
-    public Enemy[] enemies;
 
-    public int enemiesleft;
+    [System.Serializable]
+    public class wave
+    {
+        public Groups[] groups;
+        public float timeToNextEnemey;
+        public float timeToNectWave;
 
-}
+
+
+    }
+
+    [System.Serializable]
+    public class Groups
+    {
+        public Enemy[] enemies;
+
+        public int enemiesleft;
+
+    }

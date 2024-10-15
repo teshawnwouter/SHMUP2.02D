@@ -15,7 +15,6 @@ public class Character : MonoBehaviour
         health -= Amount;
         if(health <= 0)
         {
-            //Destroy(gameObject);
 
         }
 

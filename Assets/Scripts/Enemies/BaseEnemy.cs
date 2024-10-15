@@ -1,10 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
-using Unity.Mathematics;
 using UnityEngine;
 
 public class BaseEnemy : Enemy
 {
+
+    private enum State { shooting, none }
+    [SerializeField] State state;
+
     public GameObject enemyBullets;
     public Transform enemyAttackPoint;
 
@@ -12,40 +14,56 @@ public class BaseEnemy : Enemy
 
     private GameObject target;
 
+    //private int projectileAmount;
 
     protected override void Start()
     {
         base.Start();
-
+        //projectileAmount = 2;
+        state = State.none;
         health = 40;
         target = GameObject.FindGameObjectWithTag("Player");
 
 
-        shootCooldown = 1f;
+        shootCooldown = 6f;
+        transform.rotation = Quaternion.Euler(0, 0, 180);
 
+
+        for (int i = 0; i < waveSpawner.totalWaveIndex/2; i++)
+        {
+            shootCooldown -= 1.25f;
+            health += 20;
+
+        }
+        Debug.Log(health);
         StartCoroutine(ShootingPlayer());
-
     }
 
     protected override void Update()
     {
         base.Update();
-        transform.up = target.transform.position - transform.position; ;
+        if (!IsSettingUp && state == State.none)
+        {
+            state = State.shooting;
+        }
+        else if (state == State.shooting) 
+        {
+            transform.up = target.transform.position - transform.position;
+        }
     }
-
     IEnumerator ShootingPlayer()
     {
         while (true)
         {
-            if (!IsSettingUp)
+           
+            if (!IsSettingUp && state == State.shooting)
             {
-                yield return new WaitForSeconds(shootCooldown);
-                //for()
                 ShootingBullets();
                 yield return new WaitForSeconds(shootCooldown);
             }
             else
                 yield return new WaitForEndOfFrame();
+
 
         }
     }
