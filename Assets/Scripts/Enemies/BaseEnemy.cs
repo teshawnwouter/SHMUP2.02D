@@ -32,10 +32,14 @@ public class BaseEnemy : Enemy
         for (int i = 0; i < waveSpawner.totalWaveIndex/2; i++)
         {
             shootCooldown -= 1.25f;
+            if(shootCooldown < 0)
+            {
+                shootCooldown = .1f;
+            }
             health += 20;
 
         }
-        Debug.Log(health);
+        Debug.Log(shootCooldown);
         StartCoroutine(ShootingPlayer());
     }
 
@@ -46,9 +50,9 @@ public class BaseEnemy : Enemy
         {
             state = State.shooting;
         }
-        else if (state == State.shooting) 
+        else if (state == State.shooting ) 
         {
-            transform.up = target.transform.position - transform.position;
+           
         }
     }
     IEnumerator ShootingPlayer()
@@ -63,9 +67,8 @@ public class BaseEnemy : Enemy
             }
             else
                 yield return new WaitForEndOfFrame();
-
-
         }
+
     }
 
     private void ShootingBullets()

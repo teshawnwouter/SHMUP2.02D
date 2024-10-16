@@ -55,8 +55,11 @@ public class StrongerEnemy : Enemy
         }
         else if (state == State.attacking) 
         {
-            transform.up = enemy.transform.position - transform.position;
-            MoveLeftAndRight();
+            if(enemy != null)
+            {
+                MoveLeftAndRight();
+                transform.up = enemy.transform.position - transform.position;
+            }
         }
     }
 

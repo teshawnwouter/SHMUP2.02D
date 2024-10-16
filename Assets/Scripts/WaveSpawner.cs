@@ -19,6 +19,10 @@ public class WaveSpawner : MonoBehaviour
 
     public wave[] waves;
 
+    public int numberOfEnemies;
+
+    [SerializeField] private GameObject[] enemyTypes;
+
     void Start()
     {
         readyToSpawnWave = true;
@@ -33,7 +37,8 @@ public class WaveSpawner : MonoBehaviour
 
 
         }
-    }
+
+}
 
     void Update()
     {
@@ -97,15 +102,15 @@ public class WaveSpawner : MonoBehaviour
 
     IEnumerator SpawnWave()
     {
+        numberOfEnemies = Random.Range(3, 7);
         if (currentWaveIndex < waves.Length)
         {
-            for (int i = 0; i < waves[currentWaveIndex].groups[groupIndex].enemies.Length; i++)
+            for (int i = 0; i < numberOfEnemies; i++)
             {
-                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[i], spawnPoint.transform.position, Quaternion.identity);
-                Debug.Log(enemies.transform.position);
-
-
+                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[Random.Range(0, waves[currentWaveIndex].groups[groupIndex].enemies.Length)], spawnPoint.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
+
+                waves[currentWaveIndex].groups[groupIndex].enemiesleft = numberOfEnemies;
             }
         }
     }

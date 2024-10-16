@@ -26,7 +26,6 @@ public class MovingEnemy : Enemy
             moveSpeed = moveSpeed * 2;
             health = health + 20;
         }
-        Debug.Log(moveSpeed);
 
         transform.rotation = Quaternion.Euler(0, 0, -180);
 

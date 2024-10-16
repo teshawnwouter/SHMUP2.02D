@@ -24,4 +24,15 @@ public class Player : Character
             TakeDamage(damagerTaken);
         }
     }
+
+
+    public override void TakeDamage(int Amount)
+    {
+        base.TakeDamage(Amount);
+        if (health <= 0)
+        {
+            Debug.Log("Game Over");
+            Destroy(gameObject);
+        }
+    }
 }
