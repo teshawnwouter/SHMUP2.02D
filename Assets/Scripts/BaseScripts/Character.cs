@@ -15,13 +15,10 @@ public class Character : MonoBehaviour
         health -= Amount;
         if(health <= 0)
         {
-
+           
         }
 
     }
 
-    public virtual void AddingScores(int Amount)
-    {
-
-    }
+   
 }

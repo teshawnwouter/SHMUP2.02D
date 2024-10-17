@@ -6,6 +6,9 @@ using UnityEngine;
 [RequireComponent(typeof(BoxCollider2D))]
 public class Player : Character
 {
+
+    public float score;
+    
     public int damagerTaken = 1;
 
     public int healthpoints = 3;
@@ -31,7 +34,7 @@ public class Player : Character
         base.TakeDamage(Amount);
         if (health <= 0)
         {
-            Debug.Log("Game Over");
+            ScoreBoard.instance.SetScore(score);
             Destroy(gameObject);
         }
     }

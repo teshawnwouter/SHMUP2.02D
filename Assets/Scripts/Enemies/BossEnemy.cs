@@ -3,7 +3,6 @@ using UnityEngine;
 
 public class BossEnemy : Character
 {
-
     private enum State { settingUp, normal, enraged }
 
     [SerializeField] State state;
@@ -63,7 +62,7 @@ public class BossEnemy : Character
 
     void Update()
     {
-
+        Debug.Log();
         if (IsSettingUp)
             GoToInit();
 

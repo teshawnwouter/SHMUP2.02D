@@ -46,6 +46,7 @@ public class StrongerEnemy : Enemy
 
     protected override void Update()
     {
+        Debug.Log(scoreGiven);
         base.Update();
 
         if (!IsSettingUp && state == State.none)

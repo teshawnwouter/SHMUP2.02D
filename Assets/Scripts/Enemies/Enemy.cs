@@ -10,8 +10,10 @@ public class Enemy : Character
     protected bool IsSettingUp;
 
     public WaveSpawner waveSpawner;
-   
 
+    public float scoreGiven = 3;
+
+    Player player;
 
     protected float rightSideOfTheScreen;
     protected float leftSideOfTheScreen;
@@ -66,6 +68,7 @@ public class Enemy : Character
 
         if (health <= 0)
         {
+            player.score += scoreGiven;
             waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
             Destroy(gameObject);
         }

@@ -8,13 +8,17 @@ public class ScoreBoard : MonoBehaviour
 {
     private TextMeshProUGUI[] scoreBoard;
     [SerializeField] private List<float> scores = new List<float>();
+
+
     private string scorestring;
     private string currentPlayer;
 
-    private static ScoreBoard instance;
+    public static ScoreBoard instance;
 
     [SerializeField] private TextMeshProUGUI lastScoreText;
     [SerializeField] private TextMeshProUGUI lastRunRank;
+
+
     private float lastScoreNr;
     private float lastRunRankNr;
     private void Awake()
