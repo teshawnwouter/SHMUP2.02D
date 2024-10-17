@@ -708,7 +708,7 @@ MonoBehaviour:
   countdown: 2
   spawnPoint: {fileID: 1125482880}
   currentWaveIndex: 0
-  groupIndex: 0
+  groupIndex: 2
   totalWaveIndex: 0
   waveCountDown: 1
   waves:
@@ -722,6 +722,14 @@ MonoBehaviour:
       - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
       - {fileID: 1044039109815778371, guid: 7aabd5fa7aa778049ae26eff687b0cbe, type: 3}
       - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
+      enemiesleft: 0
+    - enemies:
+      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
+      - {fileID: 1044039109815778371, guid: 7aabd5fa7aa778049ae26eff687b0cbe, type: 3}
+      - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
+      enemiesleft: 0
+    - enemies:
+      - {fileID: 7187612730067437835, guid: c45cbda3072a053478f773237afb6671, type: 3}
       enemiesleft: 0
     timeToNextEnemey: 1
     timeToNectWave: 1
@@ -1381,6 +1389,10 @@ PrefabInstance:
     - target: {fileID: 7385478327362145100, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_TagString
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7441076292295272686, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_Enabled
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

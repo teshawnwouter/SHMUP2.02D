@@ -16,14 +16,14 @@ public class Player : Character
     }
 
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
+    //private void OnTriggerEnter2D(Collider2D collision)
+    //{
         
-        if (collision.gameObject.CompareTag("EnemyBullet"))
-        {
-            TakeDamage(damagerTaken);
-        }
-    }
+    //    if (collision.gameObject.CompareTag("EnemyBullet"))
+    //    {
+    //        TakeDamage(damagerTaken);
+    //    }
+    //}
 
 
     public override void TakeDamage(int Amount)

@@ -13,13 +13,9 @@ public class BaseEnemy : Enemy
     public float shootCooldown;
 
     private GameObject target;
-
-    //private int projectileAmount;
-
     protected override void Start()
     {
         base.Start();
-        //projectileAmount = 2;
         state = State.none;
         health = 40;
         target = GameObject.FindGameObjectWithTag("Player");
@@ -32,14 +28,11 @@ public class BaseEnemy : Enemy
         for (int i = 0; i < waveSpawner.totalWaveIndex/2; i++)
         {
             shootCooldown -= 1.25f;
-            if(shootCooldown < 0)
+            if(shootCooldown < 2)
             {
-                shootCooldown = .1f;
+                shootCooldown = 2f;
             }
-            health += 20;
-
         }
-        Debug.Log(shootCooldown);
         StartCoroutine(ShootingPlayer());
     }
 

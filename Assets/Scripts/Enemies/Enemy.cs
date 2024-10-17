@@ -62,12 +62,11 @@ public class Enemy : Character
     public override void TakeDamage(int Amount)
     {
         if (!IsSettingUp)
-            base.TakeDamage(Amount);
+            base.TakeDamage(10);
 
         if (health <= 0)
         {
             waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
-            //infWaveSpawner.enemiesLeft--;
             Destroy(gameObject);
         }
     }

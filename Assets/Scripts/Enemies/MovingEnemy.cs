@@ -24,7 +24,6 @@ public class MovingEnemy : Enemy
         for (int i = 0; i < waveSpawner.totalWaveIndex/4; i++)
         {
             moveSpeed = moveSpeed * 2;
-            health = health + 20;
         }
 
         transform.rotation = Quaternion.Euler(0, 0, -180);

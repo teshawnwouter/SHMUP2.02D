@@ -19,4 +19,9 @@ public class Character : MonoBehaviour
         }
 
     }
+
+    public virtual void AddingScores(int Amount)
+    {
+
+    }
 }

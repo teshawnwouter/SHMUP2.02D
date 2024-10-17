@@ -103,11 +103,16 @@ public class WaveSpawner : MonoBehaviour
     IEnumerator SpawnWave()
     {
         numberOfEnemies = Random.Range(3, 7);
+
+        if(groupIndex == 3) 
+        {
+            numberOfEnemies = 1;
+        }
         if (currentWaveIndex < waves.Length)
         {
             for (int i = 0; i < numberOfEnemies; i++)
             {
-                Enemy enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[Random.Range(0, waves[currentWaveIndex].groups[groupIndex].enemies.Length)], spawnPoint.transform.position, Quaternion.identity);
+                Character enemies = Instantiate(waves[currentWaveIndex].groups[groupIndex].enemies[Random.Range(0, waves[currentWaveIndex].groups[groupIndex].enemies.Length)], spawnPoint.transform.position, Quaternion.identity);
                 yield return new WaitForSeconds(waves[currentWaveIndex].timeToNextEnemey);
 
                 waves[currentWaveIndex].groups[groupIndex].enemiesleft = numberOfEnemies;
@@ -132,7 +137,7 @@ public class WaveSpawner : MonoBehaviour
     [System.Serializable]
     public class Groups
     {
-        public Enemy[] enemies;
+        public Character[] enemies;
 
         public int enemiesleft;
 

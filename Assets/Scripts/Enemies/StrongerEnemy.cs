@@ -23,7 +23,7 @@ public class StrongerEnemy : Enemy
         base.Start();
        
 
-            state = State.none;
+        state = State.none;
 
         health = 60;
         flySpeed = 3f;
@@ -34,9 +34,8 @@ public class StrongerEnemy : Enemy
         transform.rotation = Quaternion.Euler(0, 0, -180);
         rb = GetComponent<Rigidbody2D>();
 
-        for (int i = 0; i < waveSpawner.currentWaveIndex / 2; i++)
+        for (int i = 0; i < waveSpawner.totalWaveIndex / 2; i++)
         {
-            health += 20;
             flySpeed *= 1.5f;
             shootDelay -= 1.25f;
         }
