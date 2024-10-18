@@ -62,7 +62,7 @@ public class BossEnemy : Character
 
     void Update()
     {
-        Debug.Log();
+        
         if (IsSettingUp)
             GoToInit();
 

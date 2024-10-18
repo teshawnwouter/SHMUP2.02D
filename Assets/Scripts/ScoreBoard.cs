@@ -6,9 +6,8 @@ using UnityEngine;
 
 public class ScoreBoard : MonoBehaviour
 {
-    private TextMeshProUGUI[] scoreBoard;
+    [SerializeField] private TextMeshProUGUI[] scoreBoard;
     [SerializeField] private List<float> scores = new List<float>();
-
 
     private string scorestring;
     private string currentPlayer;
@@ -32,7 +31,7 @@ public class ScoreBoard : MonoBehaviour
             Destroy(gameObject);
         }
         DontDestroyOnLoad(this.gameObject);
-        gameObject.GetComponent<Canvas>().enabled = false;
+        gameObject.GetComponentInChildren<Canvas>().enabled = true;
     }
 
     public void SetScore(float score)
@@ -42,7 +41,7 @@ public class ScoreBoard : MonoBehaviour
         lastScoreText.text = score.ToString();
         scores = scores.OrderByDescending(x => x).ToList();
         lastRunRankNr = 1 + scores.IndexOf(score);
-        lastRunRank.text = "#" + lastRunRankNr;
+        lastRunRank.text = "#" + lastRunRankNr + " : " + lastScoreNr;
         if (scores.Count < 11)
         {
             for (int i = 0; i < scores.Count; i++)
@@ -51,5 +50,6 @@ public class ScoreBoard : MonoBehaviour
                 scoreBoard[i].text = scorestring;
             }
         }
+        
     }
 }

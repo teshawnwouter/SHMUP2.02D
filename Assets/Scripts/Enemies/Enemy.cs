@@ -13,7 +13,7 @@ public class Enemy : Character
 
     public float scoreGiven = 3;
 
-    Player player;
+    private Player player;
 
     protected float rightSideOfTheScreen;
     protected float leftSideOfTheScreen;
@@ -23,6 +23,7 @@ public class Enemy : Character
 
     protected virtual void Start()
     {
+        player = FindObjectOfType<Player>();
         waveSpawner = FindObjectOfType<WaveSpawner>();
         IsSettingUp = true;
 

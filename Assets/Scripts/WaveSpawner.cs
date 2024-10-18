@@ -7,8 +7,8 @@ public class WaveSpawner : MonoBehaviour
     [SerializeField] private float countdown;
 
     [SerializeField] private GameObject spawnPoint;
-    public int currentWaveIndex = 0;
-    public int groupIndex = 0;
+    public int currentWaveIndex;
+    public int groupIndex;
 
     public int totalWaveIndex = 0;
 
@@ -27,6 +27,10 @@ public class WaveSpawner : MonoBehaviour
     {
         readyToSpawnWave = true;
         readyToCountDown = true;
+
+        currentWaveIndex = 0;
+        groupIndex = 0;
+        totalWaveIndex = 0;
 
         for (int i = 0; i < waves.Length; i++)
         {
