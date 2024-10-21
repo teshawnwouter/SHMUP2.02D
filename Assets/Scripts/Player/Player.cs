@@ -8,6 +8,11 @@ using UnityEngine.SceneManagement;
 public class Player : Character
 {
 
+    [SerializeField] private List<PowerUp> powerUp = new List<PowerUp>();
+
+    WaveSpawner waveSpawner;
+    //link aan de waves en zet een item in na x aantal waves
+
     public float score;
     
     public int damagerTaken = 1;
@@ -16,6 +21,8 @@ public class Player : Character
 
     private void Start()
     {
+        waveSpawner = FindObjectOfType<WaveSpawner>();
+
         health = healthpoints;
         
     }
@@ -31,6 +38,18 @@ public class Player : Character
         if (collision.gameObject.CompareTag("EnemyBullet"))
         {
             TakeDamage(damagerTaken);
+        }
+    }
+
+
+    public void GaingingPowerUps()
+    {
+        for (int i = 0; i < waveSpawner.totalWaveIndex /2; i++) 
+        {
+            //if(powerUp.Contains == powerUp)
+            //{
+            //    powerUp.Add;
+            //}
         }
     }
 

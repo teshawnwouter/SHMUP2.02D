@@ -62,6 +62,15 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shield"",
+                    ""type"": ""Button"",
+                    ""id"": ""9a24c128-b543-42b6-b2d0-4ddc3025ccb4"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,6 +205,17 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
                     ""action"": ""Pause"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""9c6f97ad-5fef-486e-949c-91665f13de5b"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Shield"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -208,6 +228,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         m_PCInputmanager_Shooting = m_PCInputmanager.FindAction("Shooting", throwIfNotFound: true);
         m_PCInputmanager_MoveKeyboard = m_PCInputmanager.FindAction("MoveKeyboard", throwIfNotFound: true);
         m_PCInputmanager_Pause = m_PCInputmanager.FindAction("Pause", throwIfNotFound: true);
+        m_PCInputmanager_Shield = m_PCInputmanager.FindAction("Shield", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -273,6 +294,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
     private readonly InputAction m_PCInputmanager_Shooting;
     private readonly InputAction m_PCInputmanager_MoveKeyboard;
     private readonly InputAction m_PCInputmanager_Pause;
+    private readonly InputAction m_PCInputmanager_Shield;
     public struct PCInputmanagerActions
     {
         private @PlayerControler m_Wrapper;
@@ -281,6 +303,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         public InputAction @Shooting => m_Wrapper.m_PCInputmanager_Shooting;
         public InputAction @MoveKeyboard => m_Wrapper.m_PCInputmanager_MoveKeyboard;
         public InputAction @Pause => m_Wrapper.m_PCInputmanager_Pause;
+        public InputAction @Shield => m_Wrapper.m_PCInputmanager_Shield;
         public InputActionMap Get() { return m_Wrapper.m_PCInputmanager; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -302,6 +325,9 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
             @Pause.started += instance.OnPause;
             @Pause.performed += instance.OnPause;
             @Pause.canceled += instance.OnPause;
+            @Shield.started += instance.OnShield;
+            @Shield.performed += instance.OnShield;
+            @Shield.canceled += instance.OnShield;
         }
 
         private void UnregisterCallbacks(IPCInputmanagerActions instance)
@@ -318,6 +344,9 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
             @Pause.started -= instance.OnPause;
             @Pause.performed -= instance.OnPause;
             @Pause.canceled -= instance.OnPause;
+            @Shield.started -= instance.OnShield;
+            @Shield.performed -= instance.OnShield;
+            @Shield.canceled -= instance.OnShield;
         }
 
         public void RemoveCallbacks(IPCInputmanagerActions instance)
@@ -341,5 +370,6 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         void OnShooting(InputAction.CallbackContext context);
         void OnMoveKeyboard(InputAction.CallbackContext context);
         void OnPause(InputAction.CallbackContext context);
+        void OnShield(InputAction.CallbackContext context);
     }
 }

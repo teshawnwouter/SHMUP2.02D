@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6bcfee0a7e957d1418dd74b5f1ea813f, type: 3}
+  m_Name: HealthBoost
+  m_EditorClassIdentifier: 
+  differentPowerUps: 1
+  healthBoost: 2
+  damageBoost: 0
+  regenRate: 0
+  canBeShielded: 0
+  shieldDuration: 0
