@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,50 +8,61 @@ using UnityEngine.SceneManagement;
 public class Player : Character
 {
 
-    [SerializeField] private List<PowerUp> powerUp = new List<PowerUp>();
+    public float regenSpeed;
+    [SerializeField] private bool ableToRegen;
+    public bool activeRegen;
+    public float maxRegenTime;
+
+    
+
+    public List<PowerUps> powerUp = new List<PowerUps>();
 
     WaveSpawner waveSpawner;
     //link aan de waves en zet een item in na x aantal waves
 
     public float score;
-    
+
     public int damagerTaken = 1;
 
     public int healthpoints = 3;
 
+    private void Awake()
+    {
+        health = healthpoints;
+    }
+
     private void Start()
     {
-        waveSpawner = FindObjectOfType<WaveSpawner>();
+        activeRegen = false;
+        ableToRegen = false;
 
-        health = healthpoints;
-        
+
+        waveSpawner = FindObjectOfType<WaveSpawner>();
     }
 
     private void Update()
     {
-        Debug.Log(score);
-    }
-
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-
-        if (collision.gameObject.CompareTag("EnemyBullet"))
+        
+        foreach (var powerup in powerUp)
         {
-            TakeDamage(damagerTaken);
+            if (powerUp.Contains(powerup))
+            {
+                if (powerup.name == "regen" && health < healthpoints)
+                {
+                    GainingHealth();
+                }
+            }
+
         }
     }
 
-
-    public void GaingingPowerUps()
-    {
-        for (int i = 0; i < waveSpawner.totalWaveIndex /2; i++) 
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            //if(powerUp.Contains == powerUp)
-            //{
-            //    powerUp.Add;
-            //}
+            if (collision.gameObject.CompareTag("EnemyBullet"))
+            {
+                TakeDamage(damagerTaken);
+            }
         }
-    }
 
 
     public override void TakeDamage(int Amount)
@@ -65,9 +76,33 @@ public class Player : Character
 
             SceneManager.LoadScene("ScoreBoard");
 
-           
-     
+
+
+
             Destroy(gameObject);
+        }
+    }
+
+    private void GainingHealth()
+    {
+
+
+        if (health < healthpoints)
+        {
+            ableToRegen = true;
+        }
+
+        if (ableToRegen == true)
+        {
+            regenSpeed -= Time.deltaTime;
+            ableToRegen = false;
+        }
+
+        if (health <= healthpoints && regenSpeed <= 0)
+        {
+            health++;
+         
+            regenSpeed = maxRegenTime;
         }
     }
 }

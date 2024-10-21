@@ -9,12 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6bcfee0a7e957d1418dd74b5f1ea813f, type: 3}
-  m_Name: Regen
+  m_Script: {fileID: 11500000, guid: 12668dec436df3048a88f8d4c192b0c8, type: 3}
+  m_Name: regen
   m_EditorClassIdentifier: 
-  differentPowerUps: 0
-  healthBoost: 0
-  damageBoost: 0
-  regenRate: 40
-  canBeShielded: 0
-  shieldDuration: 0
+  regenRateValue: 2

@@ -9,24 +9,12 @@ using UnityEngine.Advertisements.Utilities;
 //maak een tussen script
 //maak prefabs
 
-[CreateAssetMenu(fileName = "Upgrades" , menuName ="PowerUpsForPlayer")]
-public class PowerUps : ScriptableObject
+public abstract class PowerUps : ScriptableObject
 {
-   public enum DifferentPowerUps { regen, healthBoost,damageBoost}
+    protected Player player;
+    //public enum DifferentPowerUps { regen, healthBoost,damageBoost, shield, ricachetbullet, charginglaser,blackholebullet}
+    public abstract void AddToYourList(PowerUps player);
 
-    public DifferentPowerUps differentPowerUps;
+    public abstract void Aply(GameObject player);
 
-    public  int healthBoost;
-
-    public int damageBoost;
-
-    public int regenRate;
-
-    public bool canBeShielded;
-    public int shieldDuration;
-
-   
-    
-
-    
 }
