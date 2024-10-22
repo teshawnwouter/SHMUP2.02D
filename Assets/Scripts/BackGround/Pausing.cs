@@ -19,7 +19,7 @@ public class Pausing : MonoBehaviour
     {
         //liknen het schiet scritp en maken een new versie van de controlls aan
         shooting = GetComponent<Shooting>();
-        playerControler =  new PlayerControler();
+        playerControler = new PlayerControler();
 
        //we maken een event die allen kijk of de actie is gedaan en zetten deze aan
         playerControler.PCInputmanager.Pause.performed += Pause_performed;

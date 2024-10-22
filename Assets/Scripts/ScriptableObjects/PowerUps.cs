@@ -11,6 +11,15 @@ using UnityEngine.Advertisements.Utilities;
 
 public abstract class PowerUps : ScriptableObject
 {
+    public enum PowerupType
+    {
+        Regen,
+        HealthBoost,
+        DamageBoost,
+        Shield
+    }
+    public PowerupType Type;
+
     protected Player player;
     //public enum DifferentPowerUps { regen, healthBoost,damageBoost, shield, ricachetbullet, charginglaser,blackholebullet}
     public abstract void AddToYourList(PowerUps player);

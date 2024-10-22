@@ -10,7 +10,7 @@ public class WaveSpawner : MonoBehaviour
     public int currentWaveIndex;
     public int groupIndex;
 
-    public int totalWaveIndex = 0;
+    public int totalWaveIndex;
 
     private bool readyToCountDown;
     private bool readyToSpawnWave;
@@ -20,6 +20,9 @@ public class WaveSpawner : MonoBehaviour
     public wave[] waves;
 
     public int numberOfEnemies;
+    public int PowerupEveryWave = 2;
+    [HideInInspector]
+    public Player PlayerObject;
 
     [SerializeField] private GameObject[] enemyTypes;
 
@@ -30,7 +33,7 @@ public class WaveSpawner : MonoBehaviour
 
         currentWaveIndex = 0;
         groupIndex = 0;
-        totalWaveIndex = 0;
+        //totalWaveIndex = 0;
 
         for (int i = 0; i < waves.Length; i++)
         {
@@ -42,7 +45,7 @@ public class WaveSpawner : MonoBehaviour
 
         }
 
-}
+    }
 
     void Update()
     {
@@ -58,9 +61,9 @@ public class WaveSpawner : MonoBehaviour
             }
         }
 
-        if (currentWaveIndex < waves.Length) 
+        if (currentWaveIndex < waves.Length)
         {
-           
+
         }
 
         if (readyToCountDown == true)
@@ -88,6 +91,10 @@ public class WaveSpawner : MonoBehaviour
             groupIndex = 0;
             currentWaveIndex++;
             totalWaveIndex++;
+            if (totalWaveIndex % PowerupEveryWave == 0)
+            {
+                PlayerObject?.AddRandomPowerup();
+            }
         }
 
         if (readyToSpawnWave == true)
@@ -108,7 +115,9 @@ public class WaveSpawner : MonoBehaviour
     {
         numberOfEnemies = Random.Range(3, 7);
 
-        if(groupIndex == 3) 
+        waves[currentWaveIndex].groups[groupIndex].enemiesleft = numberOfEnemies;
+
+        if (groupIndex == 3)
         {
             numberOfEnemies = 1;
         }
@@ -127,22 +136,22 @@ public class WaveSpawner : MonoBehaviour
 }
 
 
-    [System.Serializable]
-    public class wave
-    {
-        public Groups[] groups;
-        public float timeToNextEnemey;
-        public float timeToNectWave;
+[System.Serializable]
+public class wave
+{
+    public Groups[] groups;
+    public float timeToNextEnemey;
+    public float timeToNectWave;
 
 
 
-    }
+}
 
-    [System.Serializable]
-    public class Groups
-    {
-        public Character[] enemies;
+[System.Serializable]
+public class Groups
+{
+    public Character[] enemies;
 
-        public int enemiesleft;
+    public int enemiesleft;
 
-    }
+}

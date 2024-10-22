@@ -25,6 +25,7 @@ public class Enemy : Character
     {
         player = FindObjectOfType<Player>();
         waveSpawner = FindObjectOfType<WaveSpawner>();
+
         IsSettingUp = true;
 
         rightSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)).x;
@@ -58,14 +59,15 @@ public class Enemy : Character
     {
         if (collision.gameObject.CompareTag("PlayerBullet"))
         {
-            TakeDamage(damageTaken);
+            
+            TakeDamage(collision.GetComponent<PlayerBullet>().damage);
         }
     }
 
     public override void TakeDamage(int Amount)
     {
         if (!IsSettingUp)
-            base.TakeDamage(10);
+            base.TakeDamage(FindObjectOfType<PlayerBullet>().damage);
 
         if (health <= 0)
         {

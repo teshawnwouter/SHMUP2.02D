@@ -10,6 +10,8 @@ public class Bullet : MonoBehaviour
     public Rigidbody2D rb;
 
     public float bulletSpeed;
+
+    public int damage;
     public virtual void Start()
     {
         //liken de rigidbody aan het component en het een velocity om te bewegen een keer

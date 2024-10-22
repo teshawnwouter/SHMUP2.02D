@@ -109,7 +109,8 @@ public class BossEnemy : Character
     public override void TakeDamage(int Amount)
     {
         if (!IsSettingUp)
-            base.TakeDamage(Amount);
+            base.TakeDamage(FindObjectOfType<PlayerBullet>().damage);
+
 
         if (health <= 0)
         {
@@ -124,11 +125,11 @@ public class BossEnemy : Character
         {
             if ((state == State.normal))
             {
-                TakeDamage(normaldamageTaken);
+                TakeDamage(collision.GetComponent<PlayerBullet>().damage);
             }
             else if ((state == State.enraged))
             {
-                TakeDamage(enrageddamageTaken);
+                TakeDamage(collision.GetComponent<PlayerBullet>().damage /2);
             }
 
         }

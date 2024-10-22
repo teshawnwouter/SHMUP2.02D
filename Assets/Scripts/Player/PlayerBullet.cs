@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class PlayerBullet : Bullet
 {
-    public override void Start()
+    Player player;
+   public override void Start()
     {
         base.Start();
+        player = FindObjectOfType<Player>();
         bulletSpeed = 10f;
         rb.velocity = transform.up * bulletSpeed;
-    }
+        damage = player.weaponBoost;
+   }
 }
