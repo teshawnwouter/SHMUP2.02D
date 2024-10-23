@@ -246,6 +246,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 468f3c3a863f7da48872faffb6fd5a23, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  fireMode: 0
+  weaponMode: 0
+  chargPower: 0
   attackPoint: {fileID: 224485693}
   projectile: {fileID: 1307829604386466458, guid: 21791fccb46ff1246861ff90e88f9958, type: 3}
 --- !u!114 &224485704
@@ -763,7 +766,6 @@ MonoBehaviour:
   waves:
   - groups:
     - enemies:
-      - {fileID: 7213365437237149799, guid: c34c109417a6dce45bf2fa1536c92e6b, type: 3}
       - {fileID: 6914862449486453965, guid: 958095058b0dced4fa16c9620fd101de, type: 3}
       - {fileID: 1044039109815778371, guid: 7aabd5fa7aa778049ae26eff687b0cbe, type: 3}
       enemiesleft: 0
@@ -1263,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.size
-      value: 5
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_ActionId
@@ -1278,6 +1280,10 @@ PrefabInstance:
       value: 9a24c128-b543-42b6-b2d0-4ddc3025ccb4
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionId
+      value: 798f34ae-1342-46c4-9078-df70fd1fddf7
+      objectReference: {fileID: 0}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[2].m_ActionName
       value: PCInputmanager/MoveKeyboard[/Keyboard/a,/Keyboard/d,/Keyboard/leftArrow,/Keyboard/rightArrow]
       objectReference: {fileID: 0}
@@ -1290,15 +1296,23 @@ PrefabInstance:
       value: PCInputmanager/Shield[/Keyboard/e]
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_ActionName
+      value: PCInputmanager/Switch[/Keyboard/q]
+      objectReference: {fileID: 0}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
@@ -1318,6 +1332,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[0].m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 224485708}
@@ -1334,6 +1352,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 224485704}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 224485698}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[1].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -1343,6 +1365,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
       propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}
+      propertyPath: m_ActionEvents.Array.data[5].m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 677445571121585352, guid: 13a74c2b096116d4c8e567c5546a22b3, type: 3}

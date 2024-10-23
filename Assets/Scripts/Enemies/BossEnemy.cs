@@ -7,8 +7,7 @@ public class BossEnemy : Character
 
     [SerializeField] State state;
 
-    private int normaldamageTaken = 5;
-    private int enrageddamageTaken = 2;
+
 
     private bool IsSettingUp;
     public WaveSpawner waveSpawner;

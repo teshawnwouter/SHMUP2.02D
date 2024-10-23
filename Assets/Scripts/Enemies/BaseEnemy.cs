@@ -5,7 +5,10 @@ public class BaseEnemy : Enemy
 {
 
     private enum State { shooting, none }
+
+
     [SerializeField] State state;
+
 
     public GameObject enemyBullets;
     public Transform enemyAttackPoint;
@@ -16,6 +19,7 @@ public class BaseEnemy : Enemy
     protected override void Start()
     {
         base.Start();
+
         state = State.none;
         health = 40;
         target = GameObject.FindGameObjectWithTag("Player");
@@ -39,13 +43,9 @@ public class BaseEnemy : Enemy
     protected override void Update()
     {
         base.Update();
-        if (!IsSettingUp && state == State.none)
+        if (!IsSettingUp && state == State.none && enemyState == EnemyState.normal)
         {
             state = State.shooting;
-        }
-        else if (state == State.shooting ) 
-        {
-           
         }
     }
     IEnumerator ShootingPlayer()
@@ -53,7 +53,7 @@ public class BaseEnemy : Enemy
         while (true)
         {
            
-            if (!IsSettingUp && state == State.shooting)
+            if (!IsSettingUp && state == State.shooting && enemyState == EnemyState.normal)
             {
                 ShootingBullets();
                 yield return new WaitForSeconds(shootCooldown);

@@ -1,27 +1,26 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class MovingEnemy : Enemy
 {
-    private enum State {  leftAndRight, upAndDown, none }
+    private enum State { leftAndRight, upAndDown, none }
     [SerializeField] private State state;
 
 
     private Rigidbody2D rb;
-    bool movingLeft = false;
-
-    bool movingUp = false;
+    private bool movingLeft = false;
+    public bool canMove = true;
+    private bool movingUp = false;
 
     [SerializeField] private float moveSpeed;
 
     protected override void Start()
     {
         base.Start();
+        canMove = true;
         moveSpeed = 3f;
 
-        for (int i = 0; i < waveSpawner.totalWaveIndex/4; i++)
+        for (int i = 0; i < waveSpawner.totalWaveIndex / 4; i++)
         {
             moveSpeed = moveSpeed * 2;
         }
@@ -40,9 +39,9 @@ public class MovingEnemy : Enemy
     protected override void Update()
     {
 
-       
+
         base.Update();
-        if (!IsSettingUp && state == State.none)
+        if (!IsSettingUp && state == State.none && enemyState == EnemyState.normal)
         {
             int stateCaller = Random.Range(0, 2);
             if (stateCaller == 0)
@@ -53,6 +52,15 @@ public class MovingEnemy : Enemy
             {
                 state = State.upAndDown;
             }
+        }
+
+        if (enemyState == EnemyState.normal) 
+        {
+            canMove = true;
+        }
+        else
+        {
+            canMove = false;
         }
 
         switch (state)
@@ -70,17 +78,21 @@ public class MovingEnemy : Enemy
 
     private void MoveLeftAndRight()
     {
-        if (!movingLeft)
+        if (!movingLeft && canMove)
         {
             rb.velocity = new Vector2(1 * moveSpeed, 0);
             transform.rotation = Quaternion.Euler(0f, 0f, -90f);
 
         }
-        else
+        else if(movingLeft && canMove) 
         {
             rb.velocity = new Vector2(-1 * moveSpeed, 0);
             transform.rotation = Quaternion.Euler(0f, 0f, 90f);
 
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         if (transform.position.x > rightSideOfTheScreen)
@@ -102,18 +114,22 @@ public class MovingEnemy : Enemy
         float topSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(Screen.width, Screen.height)).y;
         float bottomSideOfTheScreen = Camera.main.ScreenToWorldPoint(new Vector2(0f, 0f)).y;
 
-        if (!movingUp)
+        if (!movingUp && canMove)
         {
             rb.velocity = new Vector2(0, 1 * moveSpeed);
             transform.rotation = Quaternion.Euler(0f, 0, 0);
 
         }
-        else
+        else if (movingUp && canMove)
         {
             rb.velocity = new Vector2(0, -1 * moveSpeed);
             transform.rotation = Quaternion.Euler(0f, 0, -180f);
 
 
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         if (transform.position.y > topSideOfTheScreen)

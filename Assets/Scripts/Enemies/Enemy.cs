@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
+
+public enum EnemyState {normal, beingPulled }
+
 public class Enemy : Character
 {
+
+    public EnemyState enemyState;
     public int damageTaken = 10;
     private Vector2 m_InitPos;
     protected bool IsSettingUp;
@@ -23,6 +28,9 @@ public class Enemy : Character
 
     protected virtual void Start()
     {
+
+        enemyState = EnemyState.normal;
+
         player = FindObjectOfType<Player>();
         waveSpawner = FindObjectOfType<WaveSpawner>();
 
@@ -43,7 +51,10 @@ public class Enemy : Character
     protected virtual void Update()
     {
         if (IsSettingUp)
+        {
             GoToInit();
+            
+        }
     }
 
     private void GoToInit()

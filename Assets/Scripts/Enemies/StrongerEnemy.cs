@@ -15,13 +15,15 @@ public class StrongerEnemy : Enemy
     public Transform enemyAttackPoint;
     public GameObject enemyBullets;
 
+    public bool canMove = true;
+
     private float flySpeed;
     private bool movingLeft = false;
     private float  shootDelay;
     protected override void Start()
     {
         base.Start();
-       
+        canMove = true;
 
         state = State.none;
 
@@ -48,30 +50,47 @@ public class StrongerEnemy : Enemy
     {
         base.Update();
 
-        if (!IsSettingUp && state == State.none)
+        if (!IsSettingUp && state == State.none && enemyState == EnemyState.normal)
         {
             state = State.attacking;
         }
-        else if (state == State.attacking) 
+        else if (state == State.attacking && enemyState == EnemyState.normal) 
         {
-            if(enemy != null)
+            if(enemy != null && enemyState == EnemyState.normal)
             {
-                MoveLeftAndRight();
                 transform.up = enemy.transform.position - transform.position;
             }
+            MoveLeftAndRight();
+
         }
+        
+
+        if (enemyState == EnemyState.beingPulled) 
+        {
+            canMove = false;
+
+            MoveLeftAndRight();
+        }else
+        {
+            canMove = true;
+        }
+
     }
 
 
     private void MoveLeftAndRight()
     {
-        if (!movingLeft)
+        if (!movingLeft && canMove)
         {
             rb.velocity = new Vector2(1 * flySpeed, 0);
         }
-        else
+        else if(movingLeft && canMove)
         {
             rb.velocity = new Vector2(-1 * flySpeed, 0);
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
 
         if (transform.position.x > rightSideOfTheScreen)
@@ -88,7 +107,7 @@ public class StrongerEnemy : Enemy
         while (true)
         {
 
-            if (!IsSettingUp && state == State.attacking)
+            if (!IsSettingUp && state == State.attacking && enemyState == EnemyState.normal)
             {
                 ShootingBullets();
                 yield return new WaitForSeconds(shootDelay);
