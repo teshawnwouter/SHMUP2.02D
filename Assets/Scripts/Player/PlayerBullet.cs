@@ -17,13 +17,15 @@ public class PlayerBullet : Bullet
 
         shooting = FindObjectOfType<Shooting>();
         Debug.Log(shooting);
-        player = FindObjectOfType<Player>();
-        bulletSpeed = 10f;
-        rb.velocity = transform.up * bulletSpeed;
+        player = FindObjectOfType<Player>();    
+       
         damage = 10;
         damage += player.weaponBoost;
    }
-
+    private void Update()
+    {
+        transform.position += bulletSpeed* Time.unscaledDeltaTime * transform.up;
+    }
 
     protected override void OnTriggerEnter2D(Collider2D collision)
     {

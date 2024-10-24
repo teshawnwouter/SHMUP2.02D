@@ -59,7 +59,7 @@ public class Enemy : Character
 
     private void GoToInit()
     {
-        transform.position = Vector2.Lerp(transform.position, m_InitPos, Time.deltaTime);
+        transform.position = Vector2.Lerp(transform.position, m_InitPos, Time.unscaledDeltaTime);
         if (Vector2.Distance(transform.position, m_InitPos) < 0.1f)
         {
             IsSettingUp = false;

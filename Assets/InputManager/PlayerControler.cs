@@ -80,6 +80,15 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""TimeSlow"",
+                    ""type"": ""Button"",
+                    ""id"": ""fc885278-0084-4080-8d1a-5532e42aa56a"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -236,6 +245,17 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
                     ""action"": ""Switch"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""14e291bd-3745-4495-a1e3-666cf0539e4b"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""TimeSlow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -250,6 +270,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         m_PCInputmanager_Pause = m_PCInputmanager.FindAction("Pause", throwIfNotFound: true);
         m_PCInputmanager_Shield = m_PCInputmanager.FindAction("Shield", throwIfNotFound: true);
         m_PCInputmanager_Switch = m_PCInputmanager.FindAction("Switch", throwIfNotFound: true);
+        m_PCInputmanager_TimeSlow = m_PCInputmanager.FindAction("TimeSlow", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
     private readonly InputAction m_PCInputmanager_Pause;
     private readonly InputAction m_PCInputmanager_Shield;
     private readonly InputAction m_PCInputmanager_Switch;
+    private readonly InputAction m_PCInputmanager_TimeSlow;
     public struct PCInputmanagerActions
     {
         private @PlayerControler m_Wrapper;
@@ -327,6 +349,7 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_PCInputmanager_Pause;
         public InputAction @Shield => m_Wrapper.m_PCInputmanager_Shield;
         public InputAction @Switch => m_Wrapper.m_PCInputmanager_Switch;
+        public InputAction @TimeSlow => m_Wrapper.m_PCInputmanager_TimeSlow;
         public InputActionMap Get() { return m_Wrapper.m_PCInputmanager; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -354,6 +377,9 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
             @Switch.started += instance.OnSwitch;
             @Switch.performed += instance.OnSwitch;
             @Switch.canceled += instance.OnSwitch;
+            @TimeSlow.started += instance.OnTimeSlow;
+            @TimeSlow.performed += instance.OnTimeSlow;
+            @TimeSlow.canceled += instance.OnTimeSlow;
         }
 
         private void UnregisterCallbacks(IPCInputmanagerActions instance)
@@ -376,6 +402,9 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
             @Switch.started -= instance.OnSwitch;
             @Switch.performed -= instance.OnSwitch;
             @Switch.canceled -= instance.OnSwitch;
+            @TimeSlow.started -= instance.OnTimeSlow;
+            @TimeSlow.performed -= instance.OnTimeSlow;
+            @TimeSlow.canceled -= instance.OnTimeSlow;
         }
 
         public void RemoveCallbacks(IPCInputmanagerActions instance)
@@ -401,5 +430,6 @@ public partial class @PlayerControler: IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnShield(InputAction.CallbackContext context);
         void OnSwitch(InputAction.CallbackContext context);
+        void OnTimeSlow(InputAction.CallbackContext context);
     }
 }

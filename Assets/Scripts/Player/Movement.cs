@@ -11,6 +11,9 @@ public class Movement : MonoBehaviour
     //making variables that controll the movement and the speed of the Player en de rigidbody2D en ook de controlls aangemaakt in unity
     [SerializeField] private float moveSpeed;
     Rigidbody2D rb;
+
+
+    Vector2 movementDirection;
    
     private PlayerControler playerControler;
 
@@ -27,10 +30,11 @@ public class Movement : MonoBehaviour
     }
 
     //verander je update naar fixedUpdated en maak ene vector2 aan die de input leest als hij hem leest dan zet je velocity aan de rigitbody zijn x pos maal de snelheid
-    void FixedUpdate()
+    void Update()
     {
         Vector2 playerInput = playerControler.PCInputmanager.MoveKeyboard.ReadValue<Vector2>();
 
-        rb.velocity = new Vector2(playerInput.x * moveSpeed, 0);
+        //rb.velocity = new Vector2(playerInput.x * moveSpeed, 0);
+        transform.Translate(playerInput.x* moveSpeed * Time.unscaledDeltaTime,0,0);
     }
 }

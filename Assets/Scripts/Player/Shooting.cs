@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class Shooting : MonoBehaviour
 {
-    public enum FireMode { blackHole, Laser, HeavyShot, charging }
+    public enum FireMode { blackHole, charging }
 
     public FireMode fireMode;
 
@@ -44,7 +44,7 @@ public class Shooting : MonoBehaviour
     {
         if (chargPower == maxCharge)
         {
-            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length - 2)
+            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length - 1)
             {
                 weaponMode = 0;
             }
@@ -56,16 +56,11 @@ public class Shooting : MonoBehaviour
 
             switch (weaponMode)
             {
+                
                 case 0:
                     fireMode = FireMode.blackHole;
                     break;
                 case 1:
-                    fireMode = FireMode.Laser;
-                    break;
-                case 2:
-                    fireMode = FireMode.HeavyShot;
-                    break;
-                case 3:
                     fireMode = FireMode.charging;
                     break;
                 default:
@@ -88,6 +83,10 @@ public class Shooting : MonoBehaviour
         if (chargPower >= maxCharge)
         {
             chargPower = maxCharge;
+        }
+        if(chargPower <= maxCharge)
+        {
+            fireMode = FireMode.charging;
         }
     }
 }
