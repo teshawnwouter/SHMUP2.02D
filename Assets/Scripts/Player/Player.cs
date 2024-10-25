@@ -46,7 +46,8 @@ public class Player : Character
         playerControler.PCInputmanager.Shield.performed += Shield_performed;
         playerControler.PCInputmanager.Enable();
 
-        health = healthpoints;
+
+
     }
 
     private void Shield_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -62,6 +63,7 @@ public class Player : Character
 
     private void Start()
     {
+
         shieldCooldown = 5f;
 
         state = State.normal;
@@ -73,6 +75,11 @@ public class Player : Character
         waveSpawner = FindObjectOfType<WaveSpawner>();
         waveSpawner.PlayerObject = this;
         AddRandomPowerup();
+
+        health = healthpoints;
+        UIManager.instance.SetMaxHealth(healthpoints);
+
+
     }
 
     public void AddRandomPowerup()
@@ -117,6 +124,7 @@ public class Player : Character
         if (collision.gameObject.CompareTag("EnemyBullet") && state == State.normal)
         {
             TakeDamage(damagerTaken);
+            UIManager.instance.SetHealth(health);
         }
     }
 
@@ -158,6 +166,7 @@ public class Player : Character
         {
             health++;
 
+            UIManager.instance.SetHealth(health);
             regenSpeed = maxRegenTime;
         }
     }

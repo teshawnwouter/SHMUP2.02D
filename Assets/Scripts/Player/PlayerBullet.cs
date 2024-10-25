@@ -21,10 +21,12 @@ public class PlayerBullet : Bullet
        
         damage = 10;
         damage += player.weaponBoost;
+
+        rb.velocity = new Vector2(0, 1 * bulletSpeed);
    }
     private void Update()
     {
-        transform.position += bulletSpeed* Time.unscaledDeltaTime * transform.up;
+        transform.position += bulletSpeed * Time.unscaledDeltaTime * transform.up;
     }
 
     protected override void OnTriggerEnter2D(Collider2D collision)

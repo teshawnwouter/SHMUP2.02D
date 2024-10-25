@@ -44,7 +44,7 @@ public class Shooting : MonoBehaviour
     {
         if (chargPower == maxCharge)
         {
-            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length - 1)
+            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length )
             {
                 weaponMode = 0;
             }

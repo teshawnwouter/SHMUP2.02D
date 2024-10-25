@@ -34,7 +34,7 @@ public class Movement : MonoBehaviour
     {
         Vector2 playerInput = playerControler.PCInputmanager.MoveKeyboard.ReadValue<Vector2>();
 
-        //rb.velocity = new Vector2(playerInput.x * moveSpeed, 0);
+        rb.velocity = new Vector2(playerInput.x * moveSpeed, 0);
         transform.Translate(playerInput.x* moveSpeed * Time.unscaledDeltaTime,0,0);
     }
 }
