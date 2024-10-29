@@ -2,18 +2,30 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
+
 
 public class TimeSLow : MonoBehaviour
 {
+    private enum State { normal,inTimeSlow,cantTimeSlow}
+
+    [SerializeField] State state;
+
   PlayerControler playerControler;
 
     public GameObject indicator;
+    [SerializeField] private Image timeSlowCooldownUI;
 
-    [SerializeField]private bool isInSlowMode = false;
-    [SerializeField] private bool isOnCooldown = false;
-    [SerializeField]private float slowTime = 5f;
-    [SerializeField]private float slowEffect = .3f;
-    [SerializeField] private float slowCooldown = 3f;
+
+
+
+    [SerializeField] private float slowTime;
+    private float maxSlowTime = 5f;
+
+    [SerializeField] private float slowEffect = .3f;
+    [SerializeField] private float slowCooldown;
+     private float maxSlowCooldown = 5f;
+
 
     private void Awake()
     {
@@ -25,49 +37,75 @@ public class TimeSLow : MonoBehaviour
 
     private void TimeSlow_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        if (!isOnCooldown)
+        if (state == State.normal)
         {
-            isInSlowMode = true;
+            StartTimeSlow();
         }
+
         
     }
 
     void Start()
     {
-        slowTime = 5f;
+        slowTime = maxSlowTime;
+
+        timeSlowCooldownUI.fillAmount = 0f;
+        slowCooldown = maxSlowCooldown;
+        
+        state = State.normal;
+
         slowEffect = .3f;
-        isInSlowMode = false;
-        isOnCooldown = false;
-        slowCooldown = 3f;
     }
 
     void Update()
     {
-        if (isInSlowMode && !isOnCooldown)
+        if (state == State.inTimeSlow)
         {
             indicator.SetActive(true);
             slowTime -= Time.unscaledDeltaTime;
             Time.timeScale = slowEffect;
+            timeSlowCooldownUI.fillAmount = 1;
         }
-
-        if (slowTime <= 0 && !isOnCooldown)
+        else
         {
             indicator.SetActive(false);
-            Time.timeScale = 1f;
-            isInSlowMode = false;
-            slowTime = 5f;
-            isOnCooldown = true;
-           
         }
 
-        if(isOnCooldown)
+
+
+        TimeSlowCooldown();
+    }
+
+    private void StartTimeSlow()
+    {
+        if (state == State.normal)
         {
-            slowCooldown -= Time.unscaledDeltaTime;
-        }
-        if(slowCooldown <= 0)
-        {
-            slowCooldown = 3f;
-            isOnCooldown = false;
+            state = State.inTimeSlow;
         }
     }
+
+    private void TimeSlowCooldown()
+    {
+       
+
+        if (slowTime <= 0)
+        {
+            state = State.cantTimeSlow;
+        }
+
+        if(state == State.cantTimeSlow)
+        {
+            timeSlowCooldownUI.fillAmount -= 1 / slowCooldown * Time.unscaledDeltaTime;
+        }
+
+        if (timeSlowCooldownUI.fillAmount <= 0)
+        {
+            timeSlowCooldownUI.fillAmount = 0f;
+            slowCooldown = maxSlowCooldown;
+            slowTime = maxSlowTime;
+            state = State.normal;
+        }
+
+    }
+
 }

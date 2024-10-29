@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 
 [RequireComponent(typeof(BoxCollider2D))]
@@ -21,7 +22,11 @@ public class Player : Character
 
 
     public float shieldDuration;
+    private float maxShieldDuration = 5;
     [SerializeField] private float shieldCooldown;
+    [SerializeField] private Image shieldCooldownUI;
+
+    [SerializeField] private GameObject shield;
 
     public int weaponBoost;
 
@@ -56,7 +61,7 @@ public class Player : Character
         {
             if (state == State.normal)
             {
-                StartCoroutine(IsShieldingPlayer());
+                IsShieldingPlayer();
             }
         }
     }
@@ -64,7 +69,11 @@ public class Player : Character
     private void Start()
     {
 
+        shieldCooldownUI.fillAmount = 0f;
+
         shieldCooldown = 5f;
+
+        shieldDuration = maxShieldDuration;
 
         state = State.normal;
 
@@ -117,6 +126,19 @@ public class Player : Character
                 GainingHealth();
             }
         }
+
+
+        if (state == State.shielded) 
+        {
+            shieldCooldownUI.fillAmount = 1;
+            shield.SetActive(true);
+        }
+        else
+        {
+            shield.SetActive(false);
+        }
+
+        ShieldIsOnCooldown();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -171,19 +193,41 @@ public class Player : Character
         }
     }
 
-    IEnumerator IsShieldingPlayer()
+    private void IsShieldingPlayer()
     {
         if (state == State.normal)
         {
             state = State.shielded;
-            yield return new WaitForSeconds(shieldDuration);
-            state = State.cantBeShielded;
            
+
         }
-        if(state == State.cantBeShielded)
+       
+    }
+
+    private void ShieldIsOnCooldown()
+    {
+        if(state == State.shielded)
         {
-            yield return new WaitForSeconds(shieldCooldown);
-            state= State.normal;
+            shieldDuration -= Time.unscaledDeltaTime;
         }
+        if (shieldDuration <= 0)
+        {
+            state = State.cantBeShielded;
+        }
+
+        if (state == State.cantBeShielded)
+        {
+            shieldCooldownUI.fillAmount -= 1 / shieldCooldown * Time.unscaledDeltaTime;
+        }
+
+
+        if (shieldCooldownUI.fillAmount <= 0)
+        {
+
+            shieldCooldownUI.fillAmount = 0;
+            shieldDuration = maxShieldDuration;
+            state = State.normal;
+        }
+
     }
 }
