@@ -156,11 +156,11 @@ public class Player : Character
         base.TakeDamage(Amount);
         if (health <= 0)
         {
+            SceneManager.LoadScene("ScoreBoard");
 
             ScoreBoard.instance.gameObject.SetActive(true);
             ScoreBoard.instance.SetScore(score);
 
-            SceneManager.LoadScene("ScoreBoard");
 
 
 

@@ -80,6 +80,7 @@ public class TimeSLow : MonoBehaviour
     {
         if (state == State.normal)
         {
+            Time.timeScale = 1;
             state = State.inTimeSlow;
         }
     }

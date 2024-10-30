@@ -16,7 +16,6 @@ public class PlayerBullet : Bullet
 
 
         shooting = FindObjectOfType<Shooting>();
-        Debug.Log(shooting);
         player = FindObjectOfType<Player>();    
        
         damage = 10;

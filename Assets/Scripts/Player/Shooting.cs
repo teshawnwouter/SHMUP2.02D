@@ -1,5 +1,8 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
+using Unity.VisualScripting;
+
 
 public class Shooting : MonoBehaviour
 {
@@ -8,6 +11,9 @@ public class Shooting : MonoBehaviour
     public FireMode fireMode;
 
     [SerializeField] private int weaponMode;
+
+    [SerializeField] GameObject textForMode;
+    [SerializeField] TextMeshProUGUI chargeRate;
 
     public int chargPower;
 
@@ -44,7 +50,7 @@ public class Shooting : MonoBehaviour
     {
         if (chargPower == maxCharge)
         {
-            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length )
+            if(weaponMode >= System.Enum.GetValues(typeof(FireMode)).Length - 1 )
             {
                 weaponMode = 0;
             }
@@ -52,16 +58,14 @@ public class Shooting : MonoBehaviour
             {
                 weaponMode++;
             }
-            Debug.Log(System.Enum.GetValues(typeof(FireMode)).Length);
-
             switch (weaponMode)
             {
                 
                 case 0:
-                    fireMode = FireMode.blackHole;
+                    fireMode = FireMode.charging;
                     break;
                 case 1:
-                    fireMode = FireMode.charging;
+                    fireMode = FireMode.blackHole;
                     break;
                 default:
                     fireMode = FireMode.charging;
@@ -73,6 +77,7 @@ public class Shooting : MonoBehaviour
 
     private void Start()
     {
+        textForMode.SetActive(false);
         fireMode = FireMode.charging;
         maxCharge = 2;
     }
@@ -80,11 +85,24 @@ public class Shooting : MonoBehaviour
 
     private void Update()
     {
+
+        if (fireMode == FireMode.blackHole)
+        { 
+            textForMode.SetActive(true);
+        }
+        else
+        {
+            textForMode.SetActive(false);
+        }
+        chargeRate.text = chargPower.ToString();
+
         if (chargPower >= maxCharge)
         {
             chargPower = maxCharge;
+            weaponMode = 0;
+
         }
-        if(chargPower <= maxCharge)
+        if (chargPower < maxCharge)
         {
             fireMode = FireMode.charging;
         }

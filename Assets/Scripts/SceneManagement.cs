@@ -11,4 +11,12 @@ public class SceneManagement : MonoBehaviour
         SceneManager.LoadScene("MainGame");
 
     }
+
+
+
+
+    public void ExitGame()
+    {
+        Application.Quit();
+    }
 }
