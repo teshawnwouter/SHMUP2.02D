@@ -28,6 +28,8 @@ public class WaveSpawner : MonoBehaviour
 
     void Start()
     {
+
+        PlayerObject = FindAnyObjectByType<Player>();
         readyToSpawnWave = true;
         readyToCountDown = true;
 

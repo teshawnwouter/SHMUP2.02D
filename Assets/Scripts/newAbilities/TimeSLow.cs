@@ -69,6 +69,8 @@ public class TimeSLow : MonoBehaviour
         else
         {
             indicator.SetActive(false);
+            Time.timeScale = 1f;
+
         }
 
 
