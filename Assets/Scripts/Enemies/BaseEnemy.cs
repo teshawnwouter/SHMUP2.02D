@@ -16,6 +16,10 @@ public class BaseEnemy : Enemy
     public float shootCooldown;
 
     private GameObject target;
+
+
+    [SerializeField]private int projectleCount = 1;
+
     protected override void Start()
     {
         base.Start();
@@ -27,11 +31,13 @@ public class BaseEnemy : Enemy
 
         shootCooldown = 6f;
         transform.rotation = Quaternion.Euler(0, 0, 180);
+         var projectiles = Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
 
 
         for (int i = 0; i < waveSpawner.totalWaveIndex/2; i++)
         {
             shootCooldown -= 1.25f;
+            projectleCount++;
             if(shootCooldown < 2)
             {
                 shootCooldown = 2f;
@@ -55,7 +61,13 @@ public class BaseEnemy : Enemy
            
             if (!IsSettingUp && state == State.shooting && enemyState == EnemyState.normal)
             {
-                ShootingBullets();
+
+                for (int i = 0; i < projectleCount; i++)
+                {
+                    Instantiate(enemyBullets,enemyAttackPoint.transform.position, Quaternion.identity);
+                    yield return new WaitForSeconds(.1f);
+                }
+                
                 yield return new WaitForSeconds(shootCooldown);
             }
             else
@@ -64,8 +76,11 @@ public class BaseEnemy : Enemy
 
     }
 
-    private void ShootingBullets()
+    private void ShootingBullets(GameObject bullets)
     {
-        Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
+
+      
+         
+        
     }
 }

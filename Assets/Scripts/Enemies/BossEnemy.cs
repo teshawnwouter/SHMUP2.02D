@@ -7,7 +7,7 @@ public class BossEnemy : Character
 
     [SerializeField] State state;
 
-
+    int projectileCount = 1;
 
     private bool IsSettingUp;
     public WaveSpawner waveSpawner;
@@ -86,24 +86,25 @@ public class BossEnemy : Character
         {
             if (!IsSettingUp && state == State.normal)
             {
-                AttackingNormal();
+                for (int i = 0; i < projectileCount * 2; i++)
+                {
+                    Instantiate(bullets, transform.position, Quaternion.identity);
+                }
+
                 yield return new WaitForSeconds(fireRateForNormal);
             }
             else if (!IsSettingUp && state == State.enraged)
             {
-                AttackingNormal();
+                for(int i = 0; i < projectileCount * 5; i++)
+                {
+                    Instantiate(bullets, transform.position, Quaternion.identity);
+                }
                 yield return new WaitForSeconds(fireRateForRage);
             }
             else
                 yield return new WaitForEndOfFrame();
         }
     }
-
-    private void AttackingNormal()
-    {
-        Instantiate(bullets, transform.position, Quaternion.identity);
-    }
-
 
     public override void TakeDamage(int Amount)
     {

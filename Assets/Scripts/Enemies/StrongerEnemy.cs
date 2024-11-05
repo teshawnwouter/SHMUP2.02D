@@ -14,6 +14,7 @@ public class StrongerEnemy : Enemy
     private GameObject enemy;
     public Transform enemyAttackPoint;
     public GameObject enemyBullets;
+    public int projectileCount = 1;
 
     public bool canMove = true;
 
@@ -38,6 +39,7 @@ public class StrongerEnemy : Enemy
 
         for (int i = 0; i < waveSpawner.totalWaveIndex / 2; i++)
         {
+            projectileCount++;
             flySpeed *= 1.5f;
             shootDelay -= 1.25f;
         }
@@ -109,8 +111,12 @@ public class StrongerEnemy : Enemy
 
             if (!IsSettingUp && state == State.attacking && enemyState == EnemyState.normal)
             {
-                ShootingBullets();
-                yield return new WaitForSeconds(shootDelay);
+                for(int i = 0; i < projectileCount;)
+                {
+                    Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity); yield return new WaitForSeconds(shootDelay);
+                    yield return new WaitForSeconds(.1f);
+                }
+                
             }
             else
                 yield return new WaitForEndOfFrame();
@@ -119,10 +125,7 @@ public class StrongerEnemy : Enemy
         }
     }
 
-    private void ShootingBullets()
-    {
-        Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
-    }
+    
 
 
 
