@@ -144,6 +144,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 0
+  VFX: {fileID: 3783830603772588963, guid: e6d8207df1d64da489c8d9140b479600, type: 3}
   state: 0
   waveSpawner: {fileID: 0}
   bullets: {fileID: 1829374038437478116, guid: 49c4134c70486194f944c72ef86abf30, type: 3}

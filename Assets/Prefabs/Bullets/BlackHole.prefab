@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a0b91d36aea6aba48b48ba73efb930ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  VFX: {fileID: 5082209573068618775, guid: 85b4c8a340cfc804290480a59d4cc0a8, type: 3}
   pullDistance: 4
   enemyMask:
     serializedVersion: 2

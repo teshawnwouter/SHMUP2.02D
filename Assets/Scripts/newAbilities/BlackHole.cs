@@ -2,6 +2,9 @@ using UnityEngine;
 
 public class BlackHole : MonoBehaviour
 {
+
+    public GameObject VFX;
+
     float pullStregnt = 3f;
     public float pullDistance;
     private float distanceFromCenter = 1f;
@@ -29,17 +32,18 @@ public class BlackHole : MonoBehaviour
             pullTimer -= Time.deltaTime;
             if (startPulling)
             {
-                Collider2D[] hitcollider = Physics2D.OverlapCircleAll(transform.position, pullDistance,enemyMask);
+                Collider2D[] hitcollider = Physics2D.OverlapCircleAll(transform.position, pullDistance, enemyMask);
                 foreach (Collider2D obj in hitcollider)
                 {
                     if (Vector3.Distance(obj.transform.position, transform.position) > distanceFromCenter)
                     {
-                       
-                        
-                            obj.GetComponent<Enemy>().enemyState = EnemyState.beingPulled;
+
+                        obj.GetComponent<Enemy>().enemyState = EnemyState.beingPulled;
                         Vector3 direction = transform.position - obj.transform.position;
                         direction.Normalize();
-                        obj.transform.position += direction * pullStregnt * Time.deltaTime;
+                        var goVFX = Instantiate(VFX, transform.position, Quaternion.identity);
+                        Destroy(goVFX, pullTimer);
+                        obj.transform.position += direction * pullStregnt * Time.unscaledDeltaTime;
                     }
                     else if (Vector3.Distance(obj.transform.position, transform.position) <= distanceFromCenter)
                     {
@@ -47,9 +51,9 @@ public class BlackHole : MonoBehaviour
                     }
                     if (pullTimer <= 0)
                     {
-                            obj.GetComponent<Enemy>().enemyState = EnemyState.normal;
-                    
-                        Destroy(this.gameObject);
+                        obj.GetComponent<Enemy>().enemyState = EnemyState.normal;
+                            
+                            Destroy(this.gameObject);
                     }
 
                 }

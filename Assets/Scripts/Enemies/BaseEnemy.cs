@@ -31,7 +31,7 @@ public class BaseEnemy : Enemy
 
         shootCooldown = 6f;
         transform.rotation = Quaternion.Euler(0, 0, 180);
-         var projectiles = Instantiate(enemyBullets, enemyAttackPoint.transform.position, Quaternion.identity);
+        
 
 
         for (int i = 0; i < waveSpawner.totalWaveIndex/2; i++)
@@ -74,13 +74,5 @@ public class BaseEnemy : Enemy
                 yield return new WaitForEndOfFrame();
         }
 
-    }
-
-    private void ShootingBullets(GameObject bullets)
-    {
-
-      
-         
-        
     }
 }

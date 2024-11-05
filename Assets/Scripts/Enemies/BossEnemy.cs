@@ -5,6 +5,8 @@ public class BossEnemy : Character
 {
     private enum State { settingUp, normal, enraged }
 
+    public GameObject VFX;
+
     [SerializeField] State state;
 
     int projectileCount = 1;
@@ -114,6 +116,7 @@ public class BossEnemy : Character
 
         if (health <= 0)
         {
+            GameObject explotion = Instantiate(VFX, transform.position, Quaternion.identity);
             waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
             Destroy(gameObject);
         }

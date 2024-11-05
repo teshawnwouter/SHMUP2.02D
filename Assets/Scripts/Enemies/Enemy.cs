@@ -8,6 +8,7 @@ public enum EnemyState {normal, beingPulled }
 
 public class Enemy : Character
 {
+    public GameObject VFX;
 
     public EnemyState enemyState;
     public int damageTaken = 10;
@@ -30,6 +31,7 @@ public class Enemy : Character
     {
 
         enemyState = EnemyState.normal;
+
 
         player = FindObjectOfType<Player>();
         waveSpawner = FindObjectOfType<WaveSpawner>();
@@ -84,6 +86,7 @@ public class Enemy : Character
         {
             player.score += scoreGiven;
             waveSpawner.waves[waveSpawner.currentWaveIndex].groups[waveSpawner.groupIndex].enemiesleft--;
+            GameObject explotion = Instantiate(VFX, transform.position, Quaternion.identity);
             Destroy(gameObject);
         }
     }
